@@ -77,8 +77,7 @@ bindsym {
 	## App shortcuts
 	$mod+w exec --no-startup-id $browser
 	$mod+o exec --no-startup-id $notes
-	$mod+t exec --no-startup-id /usr/bin/thunar
-	# $mod+n exec --no-startup-id $files
+	$mod+t exec --no-startup-id $files
 	$mod+Return exec --no-startup-id $term
 
 	# Selection Screenshot (f6) / Full Desktop Screenshot (f7) / Single Window Screenshot (f8)

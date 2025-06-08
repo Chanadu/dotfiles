@@ -135,6 +135,7 @@
 		vscode
 		fd
 		gh
+		sway-contrib.grimshot
 	];
 
 	fonts.packages = with pkgs; [

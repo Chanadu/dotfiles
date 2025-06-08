@@ -25,4 +25,4 @@ gaps outer 0
 default_border pixel 4
 default_floating_border normal 4
 
-exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr -r
+exec --no-startup-id xdg-desktop-portal-wlr -r
