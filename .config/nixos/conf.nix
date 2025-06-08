@@ -118,6 +118,7 @@
 		cmake
 		# kitty
 		playerctl
+		xdg-desktop-portal
 		xdg-desktop-portal-wlr
 		polkit
 		# gtk4
@@ -136,6 +137,7 @@
 		fd
 		gh
 		sway-contrib.grimshot
+		slurp
 	];
 
 	fonts.packages = with pkgs; [
@@ -193,6 +195,24 @@
 
 	programs.fish.enable = true;
 
+	programs.waybar.enable = true;
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [
+			xdg-desktop-portal-wlr
+		];
+		wlr = {
+			enable = true;
+			settings = {
+				screencast = {
+					chooser_type = "none";
+					output_name = "DP-1";
+				};
+			};
+		};
+	};
+
 	# List services that you want to enable:
 
 	# Enable the OpenSSH daemon.
@@ -207,8 +227,12 @@
 	};
 
 
-
-	environment.sessionVariables.NIXOS_OZONE_WL = "1";
+	environment.sessionVariables = {
+		NIXOS_OZONE_WL = "1";
+		XDG_SESSION_TYPE="wayland";
+		XDG_SESSION_DESKTOP="sway";
+		XDG_CURRENT_DESKTOP="sway";
+	};
 
 	# Open ports in the firewall.
 	# networking.firewall.allowedTCPPorts = [ ... ];
@@ -223,5 +247,4 @@
 	# Before changing this value read the documentation for this option
 	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 	system.stateVersion = "25.05"; # Did you read the comment?
-
 }
