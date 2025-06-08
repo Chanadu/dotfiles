@@ -15,6 +15,8 @@
 		dates = "daily";
 	};
 
+	nix.settings.experimental-features = ["nix-command" "flakes"];
+
 	# Bootloader.
 	boot.loader.systemd-boot = {
 		enable = true;
@@ -72,6 +74,10 @@
 			extraGroups = [ "networkmanager" "wheel" ];
 			packages = with pkgs; [];
 			shell = pkgs.fish;
+		};
+		groups.input = {
+			name = "input";
+			members = ["chanadu"];
 		};
 	};
 
@@ -139,6 +145,22 @@
 		sway-contrib.grimshot
 		slurp
 		libnotify
+		killall
+		via
+		adw-gtk3
+		python313
+		ninja
+		cairo
+		# python313Packages.pycairo
+		libjpeg
+		giflib
+		pkg-config
+		# xorg.libXt
+		# haskellPackages.gi-cairo
+		# python313Packages.pygobject3
+		gtk3
+		gobject-introspection
+		virtualenv
 	];
 
 	fonts.packages = with pkgs; [
@@ -228,11 +250,18 @@
 	};
 
 
-	environment.sessionVariables = {
-		NIXOS_OZONE_WL = "1";
-		XDG_SESSION_TYPE="wayland";
-		XDG_SESSION_DESKTOP="sway";
-		XDG_CURRENT_DESKTOP="sway";
+	environment = {
+		variables = {
+			GTK_THEME = "Adwaita:dark";
+			EDITOR = "nvim";
+			TERM = "alacritty";
+		};
+		sessionVariables = {
+			NIXOS_OZONE_WL = "1";
+			XDG_SESSION_TYPE="wayland";
+			XDG_SESSION_DESKTOP="sway";
+			XDG_CURRENT_DESKTOP="sway";
+		};
 	};
 
 	# Open ports in the firewall.
