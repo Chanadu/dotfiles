@@ -138,6 +138,7 @@
 		gh
 		sway-contrib.grimshot
 		slurp
+		libnotify
 	];
 
 	fonts.packages = with pkgs; [

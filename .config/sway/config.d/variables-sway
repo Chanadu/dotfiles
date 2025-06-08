@@ -10,8 +10,7 @@ set $browser firefox
 set $notes obsidian
 set $files thunar
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu --no-startup-id rofi -modi drun -show drun \
-			-config ~/.config/rofi/rofidmenu.rasi
+set $menu ~/.config/rofi/launchers/type-1/launcher.sh
 
 set $monitor1 DP-1
 set $monitor2 DP-3
