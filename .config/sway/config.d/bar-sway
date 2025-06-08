@@ -1,0 +1,28 @@
+# bar {
+# 	binding_mode_indicator yes
+# 	gaps 0 0 0 0
+# 	height 0
+# 	mode dock
+# 	pango_markup enabled
+# 	position bottom
+# 	separator_symbol "|"
+#
+# 	status_command while date +'%d-%m-%y %X'; do sleep 1; done
+#
+# 	status_edge_padding 8
+# 	status_padding 2
+# 	
+# 	strip_workspace_name no
+# 	strip_workspace_numbers no
+# 	wrap_scroll yes
+# 	workspace_buttons yes
+# 	workspace_min_width 64
+# 	
+# 	colors {
+# 		statusline #ffffff
+# 		background #323232
+# 		inactive_workspace #32323200 #32323200 #5c5c5c
+# 	}
+# }
+
+bar swaybar_command waybar

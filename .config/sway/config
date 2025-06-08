@@ -1,0 +1,7 @@
+# Read `man 5 sway` for a complete reference.
+include ~/.config/sway/config.d/*
+
+font pango:MonaspiceNe Nerd Font 14
+
+# Move minimized windows into Scratchpad (enable|disable)
+scratchpad_minimize disable

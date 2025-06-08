@@ -1,0 +1,20 @@
+set $mod Mod4
+
+set $up k
+set $right l
+set $left h
+set $down j
+
+set $term alacritty
+set $browser firefox
+set $notes obsidian
+set $files /usr/bin/thunar
+# set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu --no-startup-id rofi -modi drun -show drun \
+			-config ~/.config/rofi/rofidmenu.rasi
+
+set $monitor1 DP-1
+set $monitor2 DP-3
+# set $monitor3 HDMI-A-1
+
+set $background-image "~/Folders/Pictures/wallpaper.png"

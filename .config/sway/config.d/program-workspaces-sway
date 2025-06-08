@@ -1,0 +1,11 @@
+# bind program to workspace and focus to them on startup:
+#assign [class="(?i)vivaldi"] $ws2
+# assign [class="(?i)thunar"] workspace number 3
+# assign [class="(?i)nordpass"] workspace number 3
+# assign [class="(?i)main"] workspace number 3
+# assign [class="(?i)better*"] workspace number 3
+# assign [class="(?i)weather-notifier"] workspace number 3
+# assign [class="(?i)code"] workspace number 4
+# assign [class="(?i)neovim"] workspace number 4
+# assign [class="(?i)spotify"] workspace number 5
+# assign [class="(?i)bluebubbles"] workspace number 6

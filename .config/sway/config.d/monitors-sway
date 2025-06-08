@@ -1,0 +1,13 @@
+include ~/.config/sway/config.d/variables-sway
+
+# Check with wdisplay
+# Setting background with swaybg
+
+# output $monitor3 pos 0 0 mode 1920x1080@60Hz
+output $monitor1 pos 0 0 mode 2560x1440@170Hz
+output $monitor2 pos 2560 0 mode 1920x1080@60Hz
+
+output * bg $background-image fill
+output * scale 1
+
+focus output $monitor1

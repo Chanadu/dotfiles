@@ -1,0 +1,88 @@
+include ~/.config/sway/config.d/variables-sway
+
+bindsym {
+	# kill focused window
+	$mod+q kill
+
+	# Exit sway
+	# $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+	# $mod+Shift+e exec ~/.config/sway/scripts/powermenu
+	$mod+Shift+e exec swaynag -f "Terminus" \
+	-m "Exit sway? This will end your current Wayland session." \
+	-B "Exit now" "swaymsg exit" \
+	-B "Suspend" "systemctl suspend && pkill swaynag" \
+	-B "Reboot" "systemctl reboot" \
+	-B "Power off" "systemctl poweroff" \
+
+	# Lock the system with a picture
+	$mod+F5 exec --no-startup-id "i3lock -c 000000" 
+
+	# reload the configuration file
+	$mod+Shift+c reload
+
+	# change focus
+	$mod+$left focus left
+	$mod+$down focus down
+	$mod+$up focus up
+	$mod+$right focus right
+
+	# $mod+Left focus left
+	# $mod+Down focus down
+	# $mod+Up focus up
+	# $mod+Right focus right
+
+	# move focused window
+	$mod+Shift+$left move left
+	$mod+Shift+$down move down
+	$mod+Shift+$up move up
+	$mod+Shift+$right move right
+
+	# $mod+Shift+Left move left
+	# $mod+Shift+Down move down
+	# $mod+Shift+Up move up
+	# $mod+Shift+Right move right
+
+	# split in horizontal orientation
+	$mod+b split h
+
+	# split in vertical orientation
+	$mod+v split v
+
+	# enter fullscreen mode for the focused container
+	$mod+f fullscreen toggle
+
+	# change container layout (stacked, tabbed, toggle split)
+	$mod+s layout default 
+	$mod+g layout tabbed
+	$mod+e layout toggle split
+
+	# toggle tiling / floating
+	$mod+space floating toggle
+
+	# Toggle the current focus between tiling and floating mode
+	$mod+Shift+space floating toggle
+
+	# open new empty workspace
+	$mod+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
+
+	# switch/iterate between workspaces
+	$mod+Tab workspace next
+	$mod+Shift+Tab workspace prev
+
+	$mod+d exec $menu
+
+	#$mod+t exec --no-startup-id rofi -show window \
+	#		-config ~/.config/rofi/rofidmenu.rasi
+
+	## App shortcuts
+	$mod+w exec --no-startup-id $browser
+	$mod+o exec --no-startup-id $notes
+	$mod+t exec --no-startup-id /usr/bin/thunar
+	# $mod+n exec --no-startup-id $files
+	$mod+Return exec --no-startup-id $term
+
+	# Selection Screenshot (f6) / Full Desktop Screenshot (f7) / Single Window Screenshot (f8)
+	$mod+F6 exec --no-startup-id grimshot savecopy anything
+	# $mod+F7 exec --no-startup-id maim ~/screenshot.png
+	# $mod+F8 exec --no-startup-id maim -i $(xdotool getactivewindow) ~/screenshot.png
+}

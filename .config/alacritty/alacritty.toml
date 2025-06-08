@@ -1,0 +1,49 @@
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
+
+[window]
+padding = { x = 4, y = 4 }
+dynamic_padding = true
+
+[font]
+size = 14.0
+normal = { family = "MonaspiceNe Nerd Font Mono" }
+bold = { family = "MonaspiceNe Nerd Font Mono" }
+italic = { family = "MonaspiceNe Nerd Font Mono" }
+bold_italic = { family = "MonaspiceNe Nerd Font Mono" }
+
+[bell]
+animation = "Ease"
+duration = 100
+
+[selection]
+save_to_clipboard = false
+
+[cursor]
+style = { shape = "Beam", blinking = "On" }
+vi_mode_style = { shape = "Block", blinking = "Off" }
+
+blink_interval = 750
+blink_timeout = 0
+unfocused_hollow = true
+thickness = 0.15
+
+[terminal]
+osc52 = "CopyPaste"
+shell = "fish"
+
+[mouse]
+hide_when_typing = true
+
+[debug]
+log_level = "Warn"
+
+[general]
+live_config_reload = true
+working_directory = "None"
+import = [
+	"~/.config/alacritty/themes/themes/one_dark.toml"
+]
+
+
