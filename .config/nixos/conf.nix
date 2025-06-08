@@ -134,6 +134,7 @@
 		lazygit
 		vscode
 		fd
+		gh
 	];
 
 	fonts.packages = with pkgs; [
