@@ -18,10 +18,22 @@
 	nix.settings.experimental-features = ["nix-command" "flakes"];
 
 	# Bootloader.
-	boot.loader.systemd-boot = {
+	# boot.loader.systemd-boot = {
+	# 	enable = true;
+	# 	configurationLimit = 3;
+	# };
+	boot.loader.systemd-boot.enable = false;
+
+	boot.loader.grub = {
 		enable = true;
-		configurationLimit = 3;
+		device = "nodev";
+		useOSProber = true;
+		efiSupport = true;
+		extraConfig = "set theme=/nix/store/1zaqasa6x02vw09wwpbqzn4br0slizwj-minimal-grub-theme-0.3.0/theme.txt";
+		splashImage = null;
+		# configurationLimit = 3;
 	};
+
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "chanadu-desktop"; # Define your hostname.
@@ -62,8 +74,19 @@
 		variant = "";
 	};
 
-	services.xserver.enable = true;
-	# services.displayManager.defaultSession = "swayfx";
+	services.xserver = {
+		enable = true;
+		# displayManager = {
+		# 	gdm = {
+		# 	enable = true;
+		# 	wayland = true;
+		# 	autoLogin.delay = -1;
+		# 	banner = "AhjsdgjhsdfkhsdfklhA";
+		# 	};
+		# };
+	};
+	# services.displayManager.defaultSession = "asdasd";
+	services.libinput.enable = true;
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users = {
@@ -100,8 +123,8 @@
 		alacritty
 		fish
 		waybar
-		# greetd.greetd
-		ly
+		# ly
+
 		firefox
 		rofi
 		pipewire
@@ -161,6 +184,13 @@
 		gtk3
 		gobject-introspection
 		virtualenv
+		xorg.xev
+		google-chrome
+		libinput
+		minimal-grub-theme
+		usbutils
+		udiskie
+		udisks
 	];
 
 	fonts.packages = with pkgs; [
@@ -198,7 +228,20 @@
 	security.polkit.enable = true;
 
 	services.gnome.gnome-keyring.enable = true;
+
+	services.gvfs.enable = true;
+	services.udisks2.enable = true;
 	  
+	# services.greetd = {
+	# 	enable = true;
+	# 	settings = rec {
+	# 		initial_session = {
+	# 		command = "{config.programs.swayfx.package}/bin/sway -- conf";
+	# 		user = "greeter";
+	# 		};
+	# 		default_session = initial_session;
+	# 	};
+	# };
 
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
@@ -219,6 +262,9 @@
 	programs.fish.enable = true;
 
 	programs.waybar.enable = true;
+
+	programs.regreet.enable = true;
+
 
 	xdg.portal = {
 		enable = true;

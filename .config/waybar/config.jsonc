@@ -9,6 +9,7 @@
 	// Choose the order of the modules
 	"modules-left": [
 		"sway/workspaces",
+		"custom/separator",
 		"sway/window"
 		// "sway/mode",
 		// "sway/scratchpad",
@@ -240,7 +241,7 @@
 		"tooltip": false
 	},
 	"custom/spotify": {
-		"exec": "./mediaplayer.sh",
+		"exec": "~/.config/waybar/mediaplayer.sh",
 		"format": "{}",
 		// 
 		"escape": true,

@@ -25,4 +25,4 @@
 # 	}
 # }
 
-# bar swaybar_command waybar
+bar swaybar_command waybar

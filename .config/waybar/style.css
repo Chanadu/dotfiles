@@ -70,7 +70,8 @@ button:hover {
 #power-profiles-daemon,
 #mpd,
 #window,
-#custom-power {
+#custom-power,
+#keyboard-state {
   padding: 4px 4px;
   color: white;
   /* background-color: #242b38; */
@@ -195,7 +196,7 @@ label:focus {
 }
 
 #temperature {
-  color: #f0932b;
+  /* color: #f0932b; */
 }
 
 #temperature.critical {
@@ -290,4 +291,8 @@ label:focus {
 
 #privacy-item.audio-out {
   background-color: #0069d4;
+}
+
+#custom-separator {
+  color: #555555;
 }
