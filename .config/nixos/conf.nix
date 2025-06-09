@@ -129,6 +129,7 @@ in
 		vim
 		wget
 		neovim
+		firefox
 		# refind
 		# efibootmgr
 		# sbsigntool
@@ -209,6 +210,7 @@ in
 		networkmanagerapplet
 		wev
 		rofi-power-menu
+		xorg.xrandr
 	];
 
 	fonts.packages = with pkgs; [
