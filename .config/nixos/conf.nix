@@ -211,6 +211,7 @@ in
 		wev
 		rofi-power-menu
 		xorg.xrandr
+		arandr
 	];
 
 	fonts.packages = with pkgs; [
