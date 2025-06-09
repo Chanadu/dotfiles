@@ -63,13 +63,15 @@ bindsym {
 	$mod+Shift+space floating toggle
 
 	# open new empty workspace
-	$mod+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
+	$mod+n exec sway-new-workspace open
+	$mod+Shift+n exec sway-new-workspace move
 
 	# switch/iterate between workspaces
 	$mod+Tab workspace next
 	$mod+Shift+Tab workspace prev
 
 	$mod+d exec $menu
+	$mod+x exec $powermenu
 
 	#$mod+t exec --no-startup-id rofi -show window \
 	#		-config ~/.config/rofi/rofidmenu.rasi

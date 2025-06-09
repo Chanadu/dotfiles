@@ -4,10 +4,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+    sources = import ./nix/sources.nix;
+    lanzaboote = import sources.lanzaboote;
+	inherit (import ./variables.nix) primaryDisplay;
+
+in
 {
-	imports = [];
+	imports = [ lanzaboote.nixosModules.lanzaboote ];
 
 	# nix.settings.auto-optimize-store = true;
 	nix.gc = {
@@ -18,21 +24,27 @@
 	nix.settings.experimental-features = ["nix-command" "flakes"];
 
 	# Bootloader.
-	# boot.loader.systemd-boot = {
-	# 	enable = true;
-	# 	configurationLimit = 3;
-	# };
-	boot.loader.systemd-boot.enable = false;
-
-	boot.loader.grub = {
-		enable = true;
-		device = "nodev";
-		useOSProber = true;
-		efiSupport = true;
-		extraConfig = "set theme=/nix/store/1zaqasa6x02vw09wwpbqzn4br0slizwj-minimal-grub-theme-0.3.0/theme.txt";
-		splashImage = null;
-		# configurationLimit = 3;
+	boot.loader.systemd-boot = {
+		enable = lib.mkForce false;
+		# enable = true;
+		configurationLimit = 1;
 	};
+
+	boot.lanzaboote = {
+		enable = true;
+		pkiBundle = "/var/lib/sbctl";
+	};
+	# boot.loader.systemd-boot.enable = false;
+
+	# boot.loader.grub = {
+	# 	enable = true;
+	# 	device = "nodev";
+	# 	useOSProber = true;
+	# 	efiSupport = true;
+	# 	extraConfig = "set theme=/nix/store/1zaqasa6x02vw09wwpbqzn4br0slizwj-minimal-grub-theme-0.3.0/theme.txt";
+	# 	splashImage = null;
+	# 	# configurationLimit = 3;
+	# };
 
 	boot.loader.efi.canTouchEfiVariables = true;
 
@@ -123,9 +135,6 @@
 		alacritty
 		fish
 		waybar
-		# ly
-
-		firefox
 		rofi
 		pipewire
 		wireplumber
@@ -173,24 +182,33 @@
 		adw-gtk3
 		python313
 		ninja
-		cairo
 		# python313Packages.pycairo
-		libjpeg
-		giflib
-		pkg-config
 		# xorg.libXt
 		# haskellPackages.gi-cairo
 		# python313Packages.pygobject3
 		gtk3
-		gobject-introspection
-		virtualenv
 		xorg.xev
 		google-chrome
 		libinput
-		minimal-grub-theme
 		usbutils
 		udiskie
 		udisks
+		btop
+		sbctl
+		niv
+		sway-new-workspace
+		kdePackages.dolphin
+		kdePackages.qtsvg
+		kdePackages.kio-fuse 
+		kdePackages.kio-extras 
+		gparted
+		xorg.xhost
+		timeshift
+		ydotool
+		networkmanager
+		networkmanagerapplet
+		wev
+		rofi-power-menu
 	];
 
 	fonts.packages = with pkgs; [
@@ -232,16 +250,16 @@
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
 	  
-	# services.greetd = {
-	# 	enable = true;
-	# 	settings = rec {
-	# 		initial_session = {
-	# 		command = "{config.programs.swayfx.package}/bin/sway -- conf";
-	# 		user = "greeter";
-	# 		};
-	# 		default_session = initial_session;
-	# 	};
-	# };
+	services.greetd = {
+		enable = true;
+		settings = rec {
+			initial_session = {
+			command = "{config.programs.swayfx.package}/bin/sway -- conf";
+			user = "greeter";
+			};
+			default_session = initial_session;
+		};
+	};
 
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
@@ -262,6 +280,7 @@
 	programs.fish.enable = true;
 
 	programs.waybar.enable = true;
+	programs.xwayland.enable = true;
 
 	programs.regreet.enable = true;
 
@@ -276,7 +295,7 @@
 			settings = {
 				screencast = {
 					chooser_type = "none";
-					output_name = "DP-1";
+					output_name = primaryDisplay;
 				};
 			};
 		};

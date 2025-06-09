@@ -1,3 +1,5 @@
+include ~/.config/sway/config.d/personal-variables-sway
+
 set $mod Mod4
 
 set $up k
@@ -10,10 +12,7 @@ set $browser firefox
 set $notes obsidian
 set $files thunar
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu ~/.config/rofi/launchers/type-1/launcher.sh
+set $menu ~/.config/rofi/launchers/type-1/app-launcher.sh
+set $powermenu ~/.config/rofi/launchers/type-1/power-menu-launcher.sh 
 
-set $monitor1 DP-1
-set $monitor2 DP-3
-# set $monitor3 HDMI-A-1
-
-set $background-image "~/Folders/Pictures/wallpaper.png"
+set $background-image "./wallpaper.png"

@@ -296,3 +296,11 @@ label:focus {
 #custom-separator {
   color: #555555;
 }
+
+#clock {
+  margin-right: 12px;
+}
+
+#workspaces {
+  margin-left: 12px;
+}
