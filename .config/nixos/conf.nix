@@ -28,38 +28,39 @@ in
 		# enable = lib.mkForce false;
 		enable = true;
 		configurationLimit = 1;
-		
-
-		 windows = {
-			"windows" =
-				let
-					# To determine the name of the windows boot drive, boot into edk2 first, then run
-					# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
-					# which alias corresponds to which EFI partition.
-					boot-drive = "FS0";
-				in
-				{
-					title = "Windows";
-					efiDeviceHandle = boot-drive;
-					sortKey = "y_windows";
-				};
-		  };
-		# windows = {
-		# 	"windows" =
-		# 	  let
-		# 		# To determine the name of the windows boot drive, boot into edk2 first, then run
-		# 		# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
-		# 		# which alias corresponds to which EFI partition.
-		# 		boot-drive = "FS1";
-		# 	  in
-		# 	  {
-		# 		title = "Windows";
-		# 		efiDeviceHandle = boot-drive;
-		# 		sortKey = "y_windows";
-		# 	  };
-		#   };
-		
-	};
+	}
+	# 	
+	#
+	# 	 windows = {
+	# 		"windows" =
+	# 			let
+	# 				# To determine the name of the windows boot drive, boot into edk2 first, then run
+	# 				# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
+	# 				# which alias corresponds to which EFI partition.
+	# 				boot-drive = "FS0";
+	# 			in
+	# 			{
+	# 				title = "Windows";
+	# 				efiDeviceHandle = boot-drive;
+	# 				sortKey = "y_windows";
+	# 			};
+	# 	  };
+	# 	# windows = {
+	# 	# 	"windows" =
+	# 	# 	  let
+	# 	# 		# To determine the name of the windows boot drive, boot into edk2 first, then run
+	# 	# 		# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
+	# 	# 		# which alias corresponds to which EFI partition.
+	# 	# 		boot-drive = "FS1";
+	# 	# 	  in
+	# 	# 	  {
+	# 	# 		title = "Windows";
+	# 	# 		efiDeviceHandle = boot-drive;
+	# 	# 		sortKey = "y_windows";
+	# 	# 	  };
+	# 	#   };
+	# 	
+	# };
 
 	# boot.loader.systemd-boot.enable = true;
 	# boot.loader.systemd-boot.configurationLimit = 1;
@@ -71,17 +72,17 @@ in
 	# 	pkiBundle = "/var/lib/sbctl";
 	# };
 	# boot.loader.systemd-boot.enable = false;
-
+	#
 	# boot.loader.grub = {
 	# 	enable = true;
 	# 	device = "nodev";
 	# 	useOSProber = true;
 	# 	efiSupport = true;
-	# 	extraConfig = "set theme=/nix/store/1zaqasa6x02vw09wwpbqzn4br0slizwj-minimal-grub-theme-0.3.0/theme.txt";
+	# 	# extraConfig = "set theme=/nix/store/1zaqasa6x02vw09wwpbqzn4br0slizwj-minimal-grub-theme-0.3.0/theme.txt";
 	# 	splashImage = null;
 	# 	# configurationLimit = 3;
 	# };
-
+	# #
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "chanadu-desktop"; # Define your hostname.
