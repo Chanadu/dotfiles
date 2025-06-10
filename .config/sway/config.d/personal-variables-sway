@@ -1,3 +1,0 @@
-set $monitor1 eDP-1
-
-exec_always swaymsg output $monitor1 scale 2
