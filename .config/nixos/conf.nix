@@ -25,15 +25,51 @@ in
 
 	# Bootloader.
 	boot.loader.systemd-boot = {
-		enable = lib.mkForce false;
-		# enable = true;
+		# enable = lib.mkForce false;
+		enable = true;
 		configurationLimit = 1;
+		
+
+		 windows = {
+			"windows" =
+				let
+					# To determine the name of the windows boot drive, boot into edk2 first, then run
+					# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
+					# which alias corresponds to which EFI partition.
+					boot-drive = "FS0";
+				in
+				{
+					title = "Windows";
+					efiDeviceHandle = boot-drive;
+					sortKey = "y_windows";
+				};
+		  };
+		# windows = {
+		# 	"windows" =
+		# 	  let
+		# 		# To determine the name of the windows boot drive, boot into edk2 first, then run
+		# 		# `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
+		# 		# which alias corresponds to which EFI partition.
+		# 		boot-drive = "FS1";
+		# 	  in
+		# 	  {
+		# 		title = "Windows";
+		# 		efiDeviceHandle = boot-drive;
+		# 		sortKey = "y_windows";
+		# 	  };
+		#   };
+		
 	};
 
-	boot.lanzaboote = {
-		enable = true;
-		pkiBundle = "/var/lib/sbctl";
-	};
+	# boot.loader.systemd-boot.enable = true;
+	# boot.loader.systemd-boot.configurationLimit = 1;
+
+	# boot.loader.efi.efiSysMountPoint = "/efi";
+	# boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
+		# boot.lanzaboote = {
+	# 	enable = true;
+	# 	pkiBundle = "/var/lib/sbctl";
+	# };
 	# boot.loader.systemd-boot.enable = false;
 
 	# boot.loader.grub = {
@@ -212,6 +248,7 @@ in
 		rofi-power-menu
 		xorg.xrandr
 		arandr
+		ntfs3g
 	];
 
 	fonts.packages = with pkgs; [
@@ -253,16 +290,16 @@ in
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
 	  
-	services.greetd = {
-		enable = true;
-		settings = rec {
-			initial_session = {
-			command = "{config.programs.swayfx.package}/bin/sway -- conf";
-			user = "greeter";
-			};
-			default_session = initial_session;
-		};
-	};
+	# services.greetd = {
+	# 	enable = true;
+	# 	settings = rec {
+	# 		initial_session = {
+	# 		command = "{config.programs.swayfx.package}/bin/sway -- conf";
+	# 		user = "greeter";
+	# 		};
+	# 		default_session = initial_session;
+	# 	};
+	# };
 
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
