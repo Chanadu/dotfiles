@@ -26,7 +26,7 @@
 		"power-profiles-daemon",
 		// "backlight",
 		"pulseaudio",
-		"keyboard-state",
+		// "keyboard-state",
 		"temperature",
 		"cpu",
 		"memory",
@@ -40,9 +40,9 @@
 	],
 	// Modules configuration
 	// "sway/workspaces": {
-	//     "disable-scroll": true,
+	//     "disable-scroll": false,
 	//     "all-outputs": true,
-	//     "warp-on-scroll": false,
+	//     "warp-on-scroll": true,
 	//     "format": "{name}: {icon}",
 	//     "format-icons": {
 	//         "1": "",

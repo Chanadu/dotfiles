@@ -266,6 +266,8 @@ in
 		xwayland
 		lua
 		luajitPackages.luarocks
+		ruff
+		pyright
 	];
 
 	fonts.packages = with pkgs; [
