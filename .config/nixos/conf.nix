@@ -10,6 +10,7 @@ let
     sources = import ./nix/sources.nix;
     lanzaboote = import sources.lanzaboote;
 	inherit (import ./variables.nix) primaryDisplay;
+	inherit (import ./variables.nix) displayName;
 
 in
 {
@@ -24,11 +25,15 @@ in
 	nix.settings.experimental-features = ["nix-command" "flakes"];
 
 	# Bootloader.
-	boot.loader.systemd-boot = {
-		# enable = lib.mkForce false;
-		enable = true;
-		configurationLimit = 1;
+	boot.loader = {
+		timeout = 120;
+		systemd-boot = {
+			# enable = lib.mkForce false;
+			enable = true;
+			configurationLimit = 1;
+		};
 	};
+	
 	# 	
 	#
 	# 	 windows = {
@@ -85,7 +90,7 @@ in
 	# #
 	boot.loader.efi.canTouchEfiVariables = true;
 
-	networking.hostName = "chanadu-desktop"; # Define your hostname.
+	networking.hostName = displayName; # Define your hostname.
 	# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
 	# Configure network proxy if necessary
@@ -95,7 +100,12 @@ in
 	# Enable networking
 	networking.networkmanager.enable = true;
 
-	# Set your time zone.
+	swapDevices = [{
+		device = "/swapfile";
+		size = 32 * 1024; # 32GB 
+	}];
+
+# Set your time zone.
 	time.timeZone = "America/Chicago";
 
 	# Select internationalisation properties.
@@ -251,12 +261,16 @@ in
 		arandr
 		ntfs3g
 		cdrkit
+		bluez
+		mission-planner
+		xwayland
+		lua
+		luajitPackages.luarocks
 	];
 
 	fonts.packages = with pkgs; [
 		nerd-fonts.monaspace
 	];
-
 	# gtk = {
 	# 	enable = true;
 	# 	font.name = "MonaspiceNe Nerd Font Mono";
@@ -291,7 +305,41 @@ in
 
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
-	  
+
+	services.logind.lidSwitch = "poweroff";
+	services.logind.lidSwitchExternalPower = "sleep";
+	services.logind.lidSwitchDocked = "sleep";
+
+	systemd.sleep.extraConfig = ''
+		AllowSuspend=yes
+		AllowHibernation=yes
+		AllowHybridSleep=yes
+		AllowSuspendThenHibernate=yes
+	  '';
+
+	powerManagement.enable = true;
+	services.thermald.enable = true;
+	
+	services.tlp = {
+		enable = true;
+		settings = {
+			CPU_SCALING_GOVERNOR_ON_AC = "performance";
+			CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+			CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+			CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+			CPU_MIN_PERF_ON_AC = 0;
+			CPU_MAX_PERF_ON_AC = 100;
+			CPU_MIN_PERF_ON_BAT = 0;
+			CPU_MAX_PERF_ON_BAT = 100;
+
+			# Optional helps save long term battery health
+			START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+			STOP_CHARGE_THRESH_BAT0 = 80;  # 80 and above it stops charging
+		};
+	};
+
 	# services.greetd = {
 	# 	enable = true;
 	# 	settings = rec {
@@ -383,5 +431,6 @@ in
 	# this value at the release version of the first install of this system.
 	# Before changing this value read the documentation for this option
 	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+
 	system.stateVersion = "25.05"; # Did you read the comment?
 }
