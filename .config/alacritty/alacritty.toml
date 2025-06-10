@@ -43,7 +43,7 @@ log_level = "Warn"
 live_config_reload = true
 working_directory = "None"
 import = [
-	"~/.config/alacritty/themes/themes/one_dark.toml"
+	"~/.config/alacritty/one_dark.toml"
 ]
 
 
