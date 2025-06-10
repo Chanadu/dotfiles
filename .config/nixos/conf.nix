@@ -28,7 +28,7 @@ in
 		# enable = lib.mkForce false;
 		enable = true;
 		configurationLimit = 1;
-	}
+	};
 	# 	
 	#
 	# 	 windows = {
@@ -250,6 +250,7 @@ in
 		xorg.xrandr
 		arandr
 		ntfs3g
+		cdrkit
 	];
 
 	fonts.packages = with pkgs; [
