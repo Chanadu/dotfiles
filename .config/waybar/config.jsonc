@@ -24,7 +24,7 @@
 		// "idle_inhibitor",
 		// "network",
 		"power-profiles-daemon",
-		// "backlight",
+		"backlight",
 		"pulseaudio",
 		// "keyboard-state",
 		"temperature",
