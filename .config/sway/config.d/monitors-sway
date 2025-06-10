@@ -4,6 +4,6 @@ include ~/.config/sway/config.d/variables-sway
 # Setting background with swaybg
 
 output * bg $background-image fill
-output * scale 1
+
 
 focus output $monitor1
