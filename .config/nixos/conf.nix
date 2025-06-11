@@ -145,6 +145,9 @@ in
 		# 	};
 		# };
 	};
+	services.xserver.displayManager.lightdm.enable = true;
+	services.xserver.displayManager.lightdm.greeters.gtk.enable = true;  # Enable GTK Greeter
+
 	# services.displayManager.defaultSession = "asdasd";
 	services.libinput.enable = true;
 

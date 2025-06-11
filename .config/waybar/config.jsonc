@@ -23,7 +23,7 @@
 		// "custom/hello",
 		// "idle_inhibitor",
 		// "network",
-		"power-profiles-daemon",
+		// "power-profiles-daemon",
 		"backlight",
 		"pulseaudio",
 		// "keyboard-state",
