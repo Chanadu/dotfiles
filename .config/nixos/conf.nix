@@ -99,10 +99,6 @@ in
       lidSwitch = "poweroff";
       lidSwitchExternalPower = "sleep";
       lidSwitchDocked = "sleep";
-      extraConfig = ''
-        				# don’t shutdown when power button is short-pressed
-        				HandlePowerKey=ignore
-        			'';
     };
 
     # tlp = {
@@ -154,7 +150,6 @@ in
       wrapperFeatures.gtk = true;
     };
     fish.enable = true;
-    # waybar.enable = true;
     xwayland.enable = true;
   };
 
