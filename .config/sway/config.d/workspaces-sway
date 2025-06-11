@@ -29,7 +29,7 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-# workspace 1 output $monitor1
+workspace 1 output $monitor1
 # workspace 2 output $monitor2
 # workspace 3 output $monitor1
 # workspace 3 output $monitor3
