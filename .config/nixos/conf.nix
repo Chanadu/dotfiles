@@ -59,7 +59,6 @@ in
 
   # Configure keymap in X11
   services = {
-    libinput.enable = true;
     gnome.gnome-keyring.enable = true;
     openssh.enable = true;
     gvfs.enable = true;
@@ -76,6 +75,15 @@ in
       displayManager.lightdm = {
         enable = true;
         greeters.gtk.enable = true;
+      };
+      libinput = {
+        enable = true;
+        naturalScrolling = true;
+        touchpad = {
+          middleEmulation = true;
+          tapping = true;
+          disableWhileTyping = true;
+        };
       };
     };
 
@@ -256,7 +264,6 @@ in
     gtk3
     xorg.xev
     google-chrome
-    libinput
     usbutils
     udiskie
     udisks
@@ -289,6 +296,9 @@ in
     pyright
     libpam-wrapper
     rustup
+    lshw
+    lshw-gui
+    libfprint-2-tod1-goodix
   ];
 
   fonts.packages = with pkgs; [
