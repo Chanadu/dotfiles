@@ -305,3 +305,9 @@ label:focus {
 #workspaces {
 	margin-left: 12px;
 }
+
+#custom-spotify {
+	margin: 0 8px;
+	/* flex-grow: 1; */
+	/* max-width: 1000px; */
+}

@@ -1,0 +1,1 @@
+exec_always xhost +SI:localuser:root

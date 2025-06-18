@@ -13,6 +13,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "daily";
+    options = "--delete-older-than 7d";
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -53,17 +54,40 @@ in
     };
   };
 
-  hardware.graphics = {
-    enable = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = "true";
+        };
+      };
+    };
+    graphics = {
+      enable = true;
+    };
   };
 
   # Configure keymap in X11
   services = {
     gnome.gnome-keyring.enable = true;
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = true;
+        AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+        UseDns = true;
+        X11Forwarding = true;
+        PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      };
+
+    };
     gvfs.enable = true;
     udisks2.enable = true;
-
+    blueman.enable = true;
     thermald.enable = true;
 
     xserver = {
@@ -76,14 +100,15 @@ in
         enable = true;
         greeters.gtk.enable = true;
       };
-      libinput = {
-        enable = true;
+    };
+
+    libinput = {
+      enable = true;
+      touchpad = {
         naturalScrolling = true;
-        touchpad = {
-          middleEmulation = true;
-          tapping = true;
-          disableWhileTyping = true;
-        };
+        middleEmulation = true;
+        tapping = true;
+        disableWhileTyping = true;
       };
     };
 
@@ -147,6 +172,12 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig.Type = "simple";
     };
+    user.services.mpris-proxy = {
+      description = "Mpris proxy";
+      after = [ "network.target" "sound.target" ];
+      wantedBy = [ "default.target" ];
+      serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+    };
   };
 
   powerManagement.enable = true;
@@ -177,20 +208,6 @@ in
     };
   };
 
-  environment = {
-    variables = {
-      GTK_THEME = "Adwaita:dark";
-      EDITOR = "nvim";
-      TERM = "alacritty";
-      BROWSER = "firefox";
-    };
-    sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "sway";
-      XDG_CURRENT_DESKTOP = "sway";
-    };
-  };
 
   users = {
     defaultUserShell = pkgs.fish;
@@ -209,97 +226,119 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    swayfx-unwrapped
-    vim
-    wget
-    neovim
-    firefox
-    alacritty
-    fish
-    waybar
-    rofi
-    pipewire
-    wireplumber
-    mako
-    git
-    xfce.thunar
-    p7zip
-    zoxide
-    kubectl
-    gcc
-    rocmPackages.llvm.clang-unwrapped
-    zig
-    go
-    zulu
-    fzf
-    gnumake
-    obsidian
-    nodejs_24
-    cmake
-    playerctl
-    xdg-desktop-portal
-    xdg-desktop-portal-wlr
-    polkit
-    grim
-    wl-clipboard
-    neofetch
-    autotiling
-    spotify
-    discord
-    ripgrep
-    stow
-    lazygit
-    vscode
-    fd
-    gh
-    sway-contrib.grimshot
-    slurp
-    libnotify
-    killall
-    via
-    adw-gtk3
-    python313
-    ninja
-    gtk3
-    xorg.xev
-    google-chrome
-    usbutils
-    udiskie
-    udisks
-    btop
-    sbctl
-    niv
-    sway-new-workspace
-    kdePackages.dolphin
-    kdePackages.qtsvg
-    kdePackages.kio-fuse
-    kdePackages.kio-extras
-    gparted
-    xorg.xhost
-    timeshift
-    ydotool
-    networkmanager
-    networkmanagerapplet
-    wev
-    rofi-power-menu
-    xorg.xrandr
-    arandr
-    ntfs3g
-    cdrkit
-    bluez
-    mission-planner
-    xwayland
-    lua
-    luajitPackages.luarocks
-    ruff
-    pyright
-    libpam-wrapper
-    rustup
-    lshw
-    lshw-gui
-    libfprint-2-tod1-goodix
-  ];
+  environment = {
+    variables = {
+      GTK_THEME = "Adwaita:dark";
+      EDITOR = "nvim";
+      TERM = "alacritty";
+      BROWSER = "firefox";
+      XCURSOR_SIZE = "64";
+    };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "sway";
+      XDG_CURRENT_DESKTOP = "sway";
+    };
+
+    systemPackages = with pkgs; [
+      swayfx-unwrapped
+      vim
+      wget
+      neovim
+      firefox
+      alacritty
+      fish
+      waybar
+      rofi
+      pipewire
+      wireplumber
+      mako
+      git
+      xfce.thunar
+      p7zip
+      zoxide
+      kubectl
+      gcc
+      rocmPackages.llvm.clang-unwrapped
+      zig
+      go
+      zulu
+      fzf
+      gnumake
+      obsidian
+      nodejs_24
+      cmake
+      playerctl
+      xdg-desktop-portal
+      xdg-desktop-portal-wlr
+      polkit
+      grim
+      wl-clipboard
+      neofetch
+      autotiling
+      spotify
+      discord
+      ripgrep
+      stow
+      lazygit
+      vscode
+      fd
+      gh
+      sway-contrib.grimshot
+      slurp
+      libnotify
+      killall
+      via
+      adw-gtk3
+      python313
+      ninja
+      gtk3
+      xorg.xev
+      google-chrome
+      usbutils
+      udiskie
+      udisks
+      btop
+      sbctl
+      niv
+      sway-new-workspace
+      kdePackages.dolphin
+      kdePackages.qtsvg
+      kdePackages.kio-fuse
+      kdePackages.kio-extras
+      kdePackages.okular
+      gparted
+      xorg.xhost
+      timeshift
+      ydotool
+      networkmanager
+      networkmanagerapplet
+      wev
+      rofi-power-menu
+      xorg.xrandr
+      arandr
+      ntfs3g
+      cdrkit
+      bluez
+      mission-planner
+      xwayland
+      lua
+      luajitPackages.luarocks
+      ruff
+      pyright
+      libpam-wrapper
+      rustup
+      lshw
+      lshw-gui
+      libfprint-2-tod1-goodix
+      pavucontrol
+      libreoffice
+      lxappearance
+      adwaita-icon-theme
+    ];
+
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.monaspace

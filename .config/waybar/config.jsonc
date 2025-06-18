@@ -10,7 +10,8 @@
 	"modules-left": [
 		"sway/workspaces",
 		"custom/separator",
-		"sway/window"
+		"sway/window",
+		"custom/separator"
 		// "sway/mode",
 		// "sway/scratchpad",
 		// "custom/media"
@@ -245,6 +246,7 @@
 		"exec": "~/.config/waybar/mediaplayer.sh",
 		"format": "{}",
 		// 
+		"max-length": 50,
 		"escape": true,
 		"on-click": "playerctl play-pause",
 		"on-scroll-up": "playerctl next",
