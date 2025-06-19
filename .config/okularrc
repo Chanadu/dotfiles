@@ -7,4 +7,6 @@ ShowSidebar=true
 
 [Recent Files]
 File1[$e]=$HOME/Downloads/SignatureOnlyGPA.pdf
+File2[$e]=$HOME/Programming/pi-rodactyl/auto-start/README.md
 Name1[$e]=SignatureOnlyGPA.pdf
+Name2[$e]=README.md

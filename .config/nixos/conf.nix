@@ -10,13 +10,16 @@ in
 {
   imports = [ lanzaboote.nixosModules.lanzaboote ];
 
-  nix.gc = {
-    automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 7d";
-  };
+  nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   boot = {
     lanzaboote = {
@@ -31,6 +34,11 @@ in
         configurationLimit = 1;
       };
     };
+    supportedFilesystems = [
+      "btrfs"
+      "ntfs"
+      "ext4"
+    ];
   };
 
   networking = {
@@ -73,6 +81,12 @@ in
   # Configure keymap in X11
   services = {
     gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
+    blueman.enable = true;
+    thermald.enable = true;
+    printing.enable = true;
+
     openssh = {
       enable = true;
       ports = [ 22 ];
@@ -85,10 +99,11 @@ in
       };
 
     };
-    gvfs.enable = true;
-    udisks2.enable = true;
-    blueman.enable = true;
-    thermald.enable = true;
+
+    displayManager = {
+      defaultSession = "sway";
+      sessionPackages = [ pkgs.swayfx ];
+    };
 
     xserver = {
       enable = true;
@@ -96,9 +111,16 @@ in
         layout = "us";
         variant = "";
       };
-      displayManager.lightdm = {
-        enable = true;
-        greeters.gtk.enable = true;
+      # displayManager.lightdm = {
+      #   enable = true;
+      #   greeters.gtk.enable = true;
+      # };
+      displayManager = {
+        gdm = {
+          enable = true;
+          debug = true;
+          # wayland = true;
+        };
       };
     };
 
@@ -159,7 +181,15 @@ in
     rtkit.enable = true;
     polkit.enable = true;
 
+    pam.services.swaylock = {
+      text = ''
+        auth sufficient pam_unix.so try_first_pass likeauth nullok
+        auth sufficient pam_fprintd.so
+        auth include login
+      '';
+    };
   };
+
 
   systemd = {
     sleep.extraConfig = ''
@@ -168,9 +198,13 @@ in
       			AllowHybridSleep=yes
       			AllowSuspendThenHibernate=yes
       		'';
-    services.fprintd = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig.Type = "simple";
+    services = {
+      fprintd = {
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig.Type = "simple";
+      };
+      "getty@tty1".enable = true;
+      "autovt@tty1".enable = true;
     };
     user.services.mpris-proxy = {
       description = "Mpris proxy";
@@ -224,7 +258,6 @@ in
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
 
   environment = {
     variables = {
@@ -233,12 +266,14 @@ in
       TERM = "alacritty";
       BROWSER = "firefox";
       XCURSOR_SIZE = "64";
+      NO_AT_BRIDGE = "1";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "sway";
       XDG_CURRENT_DESKTOP = "sway";
+      NO_AT_BRIDGE = "1";
     };
 
     systemPackages = with pkgs; [
@@ -336,6 +371,9 @@ in
       libreoffice
       lxappearance
       adwaita-icon-theme
+      fprintd
+      swaylock-effects
+      # swaylock-fancy
     ];
 
   };
@@ -346,3 +384,5 @@ in
 
   system.stateVersion = "25.05";
 }
+
+
