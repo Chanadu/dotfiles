@@ -72,6 +72,7 @@ bindsym {
 
 	$mod+d exec $menu
 	$mod+x exec $powermenu
+	$mod+r exec $windowmenu
 
 	#$mod+t exec --no-startup-id rofi -show window \
 	#		-config ~/.config/rofi/rofidmenu.rasi

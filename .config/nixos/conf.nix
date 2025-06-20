@@ -373,7 +373,18 @@ in
       adwaita-icon-theme
       fprintd
       swaylock-effects
-      # swaylock-fancy
+	  jq
+	  virtualenv
+      python313Packages.numpy
+	  python313Packages.nptyping
+      python313Packages.pandas
+      poetry
+      pkg-config
+      libmysqlclient
+      python313Packages.setuptools
+      libGL
+      stdenv.cc.cc.lib
+	  zlib
     ];
 
   };
@@ -381,6 +392,14 @@ in
   fonts.packages = with pkgs; [
     nerd-fonts.monaspace
   ];
+
+  # languages.python = {
+  #   enable = true;
+  #   #version = "3.12";
+  #   uv.enable = true;
+  #   uv.sync.enable = true;
+  #   venv.enable = true;
+  # };
 
   system.stateVersion = "25.05";
 }

@@ -12,7 +12,18 @@ set $browser firefox
 set $notes obsidian
 set $files thunar
 # set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $menu ~/.config/rofi/launchers/type-1/app-launcher.sh
-set $powermenu ~/.config/rofi/launchers/type-1/power-menu-launcher.sh 
+set $rofitheme "$HOME/.config/rofi/launchers/type-1/style-5.rasi"
+# set $menu ~/.config/rofi/launchers/type-1/app-launcher.sh
+# set $powermenu ~/.config/rofi/launchers/type-1/power-launcher.sh 
+# set $windowmenu ~/.config/rofi/launchers/type-1/window-launcher.sh
+
+set $menu rofi \
+    -show drun \
+    -theme $rofitheme
+set $powermenu rofi \
+    -show p \
+	-modi p:'rofi-power-menu' \
+    -theme $rofitheme
+set $windowmenu ~/.config/sway/scripts/sway-tree-switcher.sh $rofitheme
 
 set $background-image "./wallpaper.png"
