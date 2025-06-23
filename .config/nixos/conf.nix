@@ -385,6 +385,9 @@ in
       libGL
       stdenv.cc.cc.lib
 	  zlib
+	  slack
+	  unzip
+      espanso-wayland
     ];
 
   };
