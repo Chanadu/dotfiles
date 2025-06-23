@@ -26,4 +26,4 @@ set $powermenu rofi \
     -theme $rofitheme
 set $windowmenu ~/.config/sway/scripts/sway-tree-switcher.sh $rofitheme
 
-set $background-image "./wallpaper.png"
+set $background-image "$HOME/.config/sway/wallpaper.png"
