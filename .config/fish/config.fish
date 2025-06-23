@@ -2,12 +2,12 @@ if status is-interactive
 # Commands to run in interactive sessions can go here
 end
 
-# alias p 'paru && sudo fixBootLoader'
-# alias pis 'paru -Ss --searchby name'
-# alias ps 'paruz'
-# alias pi 'paru -S'
-# alias pr 'paru -R'
-# alias prs 'paru -Rs'
+alias p 'paru && sudo fixBootLoader'
+alias pis 'paru -Ss --searchby name'
+alias ps 'paruz'
+alias pi 'paru -S'
+alias pr 'paru -R'
+alias prs 'paru -Rs'
 
 #alias air '~/go/bin/air'
 #alias fyne '~/go/bin/fyne'
@@ -20,7 +20,7 @@ fish_add_path ~/Folders/CustomPrograms/CEDev/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/update.sh
 
-set -x BROWSER '/usr/bin/firefox-nightly'
+set -x BROWSER '/usr/bin/firefox'
 set -x EDITOR '/usr/bin/nvim'
 # set -x TERMINAL '/usr/bin/kitty'
 set -x TERMINAL '/usr/bin/alacritty'
