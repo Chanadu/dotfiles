@@ -1,8 +1,5 @@
 include ~/.config/sway/config.d/variables-sway
 
-# Check with wdisplay
-# Setting background with swaybg
-
 output * bg $background-image fill
 
 focus output $monitor1

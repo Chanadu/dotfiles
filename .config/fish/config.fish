@@ -9,9 +9,23 @@ alias pi 'paru -S'
 alias pr 'paru -R'
 alias prs 'paru -Rs'
 
-#alias air '~/go/bin/air'
-#alias fyne '~/go/bin/fyne'
-#alias wails '~/go/bin/wails'
+alias rscp 'rsync -aP'
+alias rsmv 'rsync -aP --remove-source-files'
+
+alias rm 'rmtrash'
+alias rmdir 'rmdirtrash'
+
+alias man 'tldr'
+alias fix 'fuck'
+
+function sudo --description "Replacement for Bash 'sudo !!' command to run last command using sudo."
+    if test "$argv" = !!
+        echo sudo $history[1]
+        eval command sudo $history[1]
+    else
+        command sudo $argv
+    end
+end
 
 fish_add_path ~/go/bin
 fish_add_path ~/Folders/CustomPrograms
@@ -22,7 +36,7 @@ fish_add_path ~/update.sh
 
 set -x BROWSER '/usr/bin/firefox'
 set -x EDITOR '/usr/bin/nvim'
-# set -x TERMINAL '/usr/bin/kitty'
+set -x SHELL '/usr/bin/fish'
 set -x TERMINAL '/usr/bin/alacritty'
 set -x CAPACITOR_ANDROID_STUDIO_PATH '/opt/android-studio/bin/studio.sh'
 set -x XDG_CURRENT_DESKTOP sway
@@ -34,9 +48,6 @@ set -x XDG_SESSION_TYPE wayland
 
 set -xU __done_min_cmd_duration 5000
 
-zoxide init --cmd cd fish | source
-#silver init | source
-#starship init fish | source
 
 # pnpm
 set -gx PNPM_HOME "/home/chanadu/.local/share/pnpm"
@@ -60,3 +71,9 @@ set -u pure_show_prefix_root_prompt true
 set -u pure_color_info blue
 set -u pure_color_primary cyan
 
+atuin init fish | source
+#silver init | source
+#starship init fish | source
+zoxide init --cmd cd fish | source
+
+thefuck --alias | source

@@ -1,0 +1,3 @@
+for_window [shell="xwayland"] title_format "[XWayland] %title"
+
+exec_always xrandr --output $monitor1 --primary

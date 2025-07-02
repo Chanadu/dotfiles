@@ -223,7 +223,7 @@
 				""
 			]
 		},
-		"on-click": "pavucontrol"
+		"on-click": "pwvucontrol"
 	},
 	"custom/power": {
 		"format": "⏻ ",

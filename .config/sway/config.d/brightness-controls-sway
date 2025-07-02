@@ -1,5 +1,5 @@
-bindsym XF86MonBrightnessUp exec brightnessctl set +10%
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 bindsym $mod+XF86MonBrightnessUp exec brightnessctl set +1%
 bindsym $mod+XF86MonBrightnessDown exec brightnessctl set 1%-
