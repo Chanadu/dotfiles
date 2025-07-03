@@ -12,7 +12,7 @@ return {
 			{ "<leader>n", group = "Highligher" },
 			{ "<leader>s", group = "[S]plits" },
 			{ "<leader>t", group = "[T]abs" },
-			{ "<leader>w", group = "[W]orkspace" },
+			-- { "<leader>w", group = "[W]orkspace" },
 			{ "<leader>m", group = "Format (-> p)" },
 			{ "<leader>r", group = "[R]estart or [R]ename" },
 			{ "<leader>c", group = "[C]opilot Chat" },
